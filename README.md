@@ -138,6 +138,7 @@ data: {
 
 ## Hardware
 
+Sensores Dirce y Temis
 
 
 Con los puntos descritos anteriormente debería ser suficiente para lograr concluir la primera fase del proyecto: obtener un sistema de monitorización sin ofrecer ninguna interacción.
