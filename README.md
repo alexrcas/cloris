@@ -179,6 +179,8 @@ Este dispositivo será el *interruptor* que abrirá o cerrará el paso del agua 
 
 ## Tecnologías empleadas
 
+Probablementente sea necesario incorporar otras según la evolución del proyecto, pero se pretende que las tecnologías de base sean las siguientes:
+
 ### Back-end
 * NodeJS
 * Nest
@@ -190,6 +192,9 @@ Este dispositivo será el *interruptor* que abrirá o cerrará el paso del agua 
 ### Front-end
 * React
 * Typescript
+
+### Aplicación móvil
+* Ionic o Flutter (por decidir)
 
 ### Hardware (dispositivos)
 * C / C++
