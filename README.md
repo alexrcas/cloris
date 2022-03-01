@@ -190,3 +190,6 @@ Este dispositivo será el *interruptor* que abrirá o cerrará el paso del agua 
 ### Front-end
 * React
 * Typescript
+
+### Hardware (dispositivos)
+* C / C++
