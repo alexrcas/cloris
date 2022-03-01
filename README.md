@@ -130,7 +130,7 @@ DELETE /waterings/id
 
 #### Riego en curso (websocket)
 ```
-onWatering
+onWatering 
 data: {
   currentLitersUsed: number
 }
@@ -138,7 +138,42 @@ data: {
 
 ## Hardware
 
-Sensores Dirce (agua), Temis (ambiente), Hebe (válvula)
+Se dispondrá de tres pequeños dispositivos:
+1. Sensor *Dirce*: encargado de monitorizar la cantidad de agua empleada en los riegos.
+2. Sensor *Temis*: responsable de monitorizar la temperatura y humedad del aire junto con la humedad del terreno.
+3. Hebe: responsable de abrir o cerrar el paso del agua para regar.
+
+Todos los dispositivos utilizan un módulo **ESP8266** para las comunicaciones vía WIFI y como microcontrolador. Los dispositivos estarán programados en **C**. Para la primera fase del proyecto (solo monitorización), serán necesarios los dos primeros sensores, mientras que a partir de la segunda fase (control del riego) será necesario el tercer dispositivo. En una primera versión los dispositivos serán alimentados por cable. Posteriormente podrían ser optimizados para utilizar baterías y funcionar de forma inalámbrica durante meses, a excepción del dispositivo *Hebe*, que necesariamente debe estar conectado siempre a una fuente de energía con suficiente potencia.
+
+### Sensor *Dirce*
+Está compuesto por:
+* ESP8266
+* Caudalímetro Y-22
+
+Se trata de un monitor de caudal de agua. Monitoriza el líquido que atraviesa la tubería y envía información relativa al riego. Es muy importante aclarar el concepto de **riego**. Un *riego* se entiende como una cantidad de agua ininterrumpida con un inicio y un fin en el tiempo. Por ejemplo:
+```
+12:00:00 - No circula agua por la tubería
+12:00:01 - Comienza a circular agua (inicio del riego y riego en curso)
+12:00:25 - El flujo del agua se detiene (fin del riego)
+```
+Lo descrito anteriormente se considera **un riego**. Una vez que se detiene el flujo de agua el riego finaliza. Si un segundo después de haberse detenido este flujo volviese a circular agua por la tubería, se consideraría un segundo riego. Dicho esto, el sensor envía dos tipos de información:
+
+* Cantidad de agua empleada en tiempo real a través de *websocket* durante el transcurso del riego.
+* Cantidad total de agua empleada al finalizar el riego.
+
+### Sensor *Temis*
+Está compuesto por:
+* ESP8266
+* Sensor de temperatura y humedad del aire DHT-22
+* Sensor de humedad del terreno **[NOMBRE]**
+
+Envía cada cierto tiempo información relativa a la temperatura del aire, humedad del mismo y humedad del terreno.
+
+### Dispositivo *Hebe*
+Está compuesto por:
+* ESP8266
+* Dispositivo para controlar el riego (bomba o electroválvula)
+
+Este dispositivo será el *interruptor* que abrirá o cerrará el paso del agua para efectuar un riego. En función del coste y las dificultades técnicas se decidirá llegado el momento por utilizar una electroválvula o simplemente una pequeña bomba que traslade el agua de un depósito al terreno. Esta cuestión es trivial por ahora, ya que el concepto de enviar una señal eléctrica para ejecutar una acción es independiente de que esta señal llegue a una electroválvula o a un relé que active la bomba.
 
 
-Con los puntos descritos anteriormente debería ser suficiente para lograr concluir la primera fase del proyecto: obtener un sistema de monitorización sin ofrecer ninguna interacción.
