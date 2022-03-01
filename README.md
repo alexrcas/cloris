@@ -177,3 +177,16 @@ Está compuesto por:
 Este dispositivo será el *interruptor* que abrirá o cerrará el paso del agua para efectuar un riego. En función del coste y las dificultades técnicas se decidirá llegado el momento por utilizar una electroválvula o simplemente una pequeña bomba que traslade el agua de un depósito al terreno. Esta cuestión es trivial por ahora, ya que el concepto de enviar una señal eléctrica para ejecutar una acción es independiente de que esta señal llegue a una electroválvula o a un relé que active la bomba.
 
 
+## Tecnologías empleadas
+
+### Back-end
+* NodeJS
+* Nest
+* Typescript
+
+### Base de datos
+* MongoDB
+
+### Front-end
+* React
+* Typescript
