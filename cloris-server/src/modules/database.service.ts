@@ -12,7 +12,8 @@ export const databaseProviders = [
                 port: 27017,
                 database: 'cloris',
                 username: 'clorisowner',
-                password: 'clorisowner'
+                password: 'clorisowner',
+                entities: [__dirname + '/../**/*.entity{.js,.ts}']
             } as ConnectionOptions;
         }
     })
