@@ -9,7 +9,7 @@ export class MeasuresService {
     constructor(private readonly measureRepository: MeasureRepository) {}
 
     async list(): Promise<Measure[]> {
-        return await this.measureRepository.find({})
+        return await this.measureRepository.find({ order: {timestamp: 'DESC'} })
     }
 
     async get(id: string): Promise<Measure> {
