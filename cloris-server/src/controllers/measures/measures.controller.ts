@@ -27,7 +27,13 @@ export class MeasuresController {
 
     @Delete()
     async deleteMeasures(): Promise<Measure[]> {
-        this.measureService.deleteAll();
+        await this.measureService.deleteAll();
+        return this.measureService.list();
+    }
+
+    @Delete(':id')
+    async deleteMeasure(@Param('id') id: string): Promise<Measure[]> {
+        await this.measureService.deleteOne(id);
         return this.measureService.list();
     }
 }

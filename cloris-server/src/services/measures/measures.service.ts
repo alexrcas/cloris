@@ -23,4 +23,9 @@ export class MeasuresService {
     async deleteAll(): Promise<DeleteResult> {
         return await this.measureRepository.delete({});
     }
+
+    async deleteOne(id: string): Promise<Measure> {
+        const measure: Measure = await this.measureRepository.findOne(id);
+        return await this.measureRepository.remove(measure);
+    }
 }
