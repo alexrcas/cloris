@@ -13,28 +13,23 @@ export class MeasuresService {
     }
 
     async listByFilter(fromDate: Date, toDate: Date): Promise<Measure[]> {
-        console.log(fromDate, toDate)
-
         let timeStampQueryObject = {};
+
         if (fromDate != undefined) {
             timeStampQueryObject['$gte'] = fromDate;
         }
+
         if (toDate != undefined) {
             timeStampQueryObject['$lte'] = toDate;
         }
-
-        console.log(timeStampQueryObject)
         
         return await this.measureRepository.find({
 
             where: {
-                timestamp: {
-                    ...timeStampQueryObject
-                }
+                timestamp: { ...timeStampQueryObject }
             },
             order: {timestamp: 'DESC'},
-
-        })
+        });
     }
 
     async get(id: string): Promise<Measure> {
