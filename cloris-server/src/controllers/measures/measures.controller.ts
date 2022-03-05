@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Req } from '@nestjs/common';
 import { Measure } from 'src/entities/measure.entity';
+import { toMongoDbDate } from 'src/helper/dateparser.helper';
 import { CustomRequest } from 'src/middlewares/timestamp.middleware';
 import { MeasuresService } from 'src/services/measures/measures.service';
 
@@ -9,7 +10,14 @@ export class MeasuresController {
     constructor(private readonly measureService: MeasuresService) {}
 
     @Get()
-    async listMeasures(): Promise<Measure[]> {
+    async listMeasures(@Query('from') from: string, @Query('to') to: string): Promise<Measure[]> {
+        const fromDate = toMongoDbDate(from);
+        const toDate = toMongoDbDate(to);
+
+        if (fromDate != undefined || toDate != undefined) {
+            return await this.measureService.listByFilter(fromDate, toDate);
+        }
+
         return await this.measureService.list();
     }
 

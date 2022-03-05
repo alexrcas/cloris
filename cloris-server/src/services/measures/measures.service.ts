@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Measure } from 'src/entities/measure.entity';
 import { MeasureRepository } from 'src/repositories/measure.repository';
-import { DeleteResult } from 'typeorm';
+import { Between, DeleteResult, LessThan, MoreThan } from 'typeorm';
 
 @Injectable()
 export class MeasuresService {
@@ -10,6 +10,31 @@ export class MeasuresService {
 
     async list(): Promise<Measure[]> {
         return await this.measureRepository.find({ order: {timestamp: 'DESC'} })
+    }
+
+    async listByFilter(fromDate: Date, toDate: Date): Promise<Measure[]> {
+        console.log(fromDate, toDate)
+
+        let timeStampQueryObject = {};
+        if (fromDate != undefined) {
+            timeStampQueryObject['$gte'] = fromDate;
+        }
+        if (toDate != undefined) {
+            timeStampQueryObject['$lte'] = toDate;
+        }
+
+        console.log(timeStampQueryObject)
+        
+        return await this.measureRepository.find({
+
+            where: {
+                timestamp: {
+                    ...timeStampQueryObject
+                }
+            },
+            order: {timestamp: 'DESC'},
+
+        })
     }
 
     async get(id: string): Promise<Measure> {
