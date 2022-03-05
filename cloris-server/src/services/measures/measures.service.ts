@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Measure } from 'src/entities/measure.entity';
 import { MeasureRepository } from 'src/repositories/measure.repository';
-import { Between, DeleteResult, LessThan, MoreThan } from 'typeorm';
+import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class MeasuresService {

@@ -1,4 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Req } from '@nestjs/common';
+import { Watering } from 'src/entities/watering.entity';
+import { toMongoDbDate } from 'src/helper/dateparser.helper';
+import { CustomRequest } from 'src/middlewares/timestamp.middleware';
 import { WateringsService } from 'src/services/waterings/waterings.service';
 
 @Controller('waterings')
@@ -7,44 +10,38 @@ export class WateringsController {
     constructor(private readonly wateringService: WateringsService) {}
 
     @Get()
-    async listWaterings() {
-        return 'watering'
-    }
-    /*
-    @Get()
-    async listMeasures(@Query('from') from: string, @Query('to') to: string): Promise<Measure[]> {
+    async listWaterings(@Query('from') from: string, @Query('to') to: string): Promise<Watering[]> {
         const fromDate = toMongoDbDate(from);
         const toDate = toMongoDbDate(to);
 
         if (fromDate != undefined || toDate != undefined) {
-            return await this.measureService.listByFilter(fromDate, toDate);
+            return await this.wateringService.listByFilter(fromDate, toDate);
         }
-
-        return await this.measureService.list();
+        return await this.wateringService.list();
     }
 
     @Get(':id')
-    async getMeasure(@Param('id') id: string): Promise<Measure> {
-        return await this.measureService.get(id);
+    async getWatering(@Param('id') id: string): Promise<Watering> {
+        return await this.wateringService.get(id)
     }
 
     @Post()
-    async postMeasure(@Body() measure: Measure, @Req() request: CustomRequest): Promise<Measure> {
-        const measureWithTimestamp: Measure = measure;
-        measureWithTimestamp.timestamp = request.timestamp;
-        return await this.measureService.create(measureWithTimestamp);
+    async createWatering(@Body() watering: Watering, @Req() request: CustomRequest): Promise<Watering> {
+        const wateringWithTimestamp = watering;
+        wateringWithTimestamp.timestamp = request.timestamp;
+        return await this.wateringService.create(watering)
     }
 
     @Delete()
-    async deleteMeasures(): Promise<Measure[]> {
-        await this.measureService.deleteAll();
-        return this.measureService.list();
+    async deleteWaterings(): Promise<Watering[]> {
+        await this.wateringService.deleteAll();
+        return this.wateringService.list();
     }
 
     @Delete(':id')
-    async deleteMeasure(@Param('id') id: string): Promise<Measure[]> {
-        await this.measureService.deleteOne(id);
-        return this.measureService.list();
+    async deleteWatering(@Param('id') id: string): Promise<Watering[]> {
+        await this.wateringService.deleteOne(id);
+        return this.wateringService.list();
     }
-    */
+
 }
