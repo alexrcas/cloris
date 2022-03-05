@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Query, Req } from '@nestjs/
 import { Measure } from 'src/entities/measure.entity';
 import { toMongoDbDate } from 'src/helper/dateparser.helper';
 import { CustomRequest } from 'src/middlewares/timestamp.middleware';
-import { MeasuresService } from 'src/services/measures/measures.service';
+import { MeasuresService } from 'src/services/measures.service';
 
 @Controller('measures')
 export class MeasuresController {

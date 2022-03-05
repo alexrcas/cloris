@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Query, Req } from '@nestjs/
 import { Watering } from 'src/entities/watering.entity';
 import { toMongoDbDate } from 'src/helper/dateparser.helper';
 import { CustomRequest } from 'src/middlewares/timestamp.middleware';
-import { WateringsService } from 'src/services/waterings/waterings.service';
+import { WateringsService } from 'src/services/waterings.service';
 
 @Controller('waterings')
 export class WateringsController {
