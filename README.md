@@ -179,7 +179,7 @@ Este dispositivo será el *interruptor* que abrirá o cerrará el paso del agua 
 
 ## Tecnologías empleadas
 
-Probablementente sea necesario incorporar otras según la evolución del proyecto, pero se pretende que las tecnologías de base sean las siguientes:
+Este trabajo tiene también como objetivo el aprendizaje, la prueba y la exploración de nuevas herramientas y tecnologías, por lo que el listado aquí propuesto no necesariamente posee una fuerte justificación desde el punto de vista técnico. Es posible también que se incorporen más elementos o se repitan módulos en varias tecnologías (por ejemplo una app móvil en Ionic y otra en Flutter). Como base para una primera iteración del proyecto se plantean las siguientes:
 
 ### Back-end
 * NodeJS
@@ -194,7 +194,10 @@ Probablementente sea necesario incorporar otras según la evolución del proyect
 * Typescript
 
 ### Aplicación móvil
-* Ionic o Flutter (por decidir)
+* Ionic o Flutter
 
 ### Hardware (dispositivos)
-* C / C++
+* C / C++ (puede que se explore MicroPython)
+
+### Virtualización
+* Docker
