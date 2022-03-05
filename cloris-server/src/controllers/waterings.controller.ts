@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Query, Req } from '@nestjs/common';
 import { Watering } from 'src/entities/watering.entity';
-import { toMongoDbDate } from 'src/helper/dateparser.helper';
+import { toMongoDbDate } from 'src/helpers/dateparser.helper';
 import { CustomRequest } from 'src/middlewares/timestamp.middleware';
 import { WateringsService } from 'src/services/waterings.service';
 
