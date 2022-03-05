@@ -24,7 +24,7 @@ El proyecto se ha dividido en tres fases que se realizarán de modo iterativo:
 #### Arquitectura
 Para esta fase, se define la siguiente arquitectura que será la base de todo el proyecto. Se opta por un esquema microlítico, ya que no se prevee una dimensión del proyecto que justifique un enfoque basado en microservicios que lo único que haría sería añadir una complejidad y problemas innecesarios.
 
-Los dispositivos se comunican con un servidor que almacenará la información en una base de datos NoSQL, ya que dada la naturaleza de los datos un modelo de persistencia orientado a documentos parece muy adecuado. El servidor será responsable también de servir la aplicación web. Consta además de un pequeño módulo de validación de datos para verificar que la medida enviada por los sensores no contiene valores disparatados debido a un posible mal funcionamiento de estos.
+Los dispositivos se comunican con un servidor que almacenará la información en una base de datos NoSQL, ya que dada la naturaleza de los datos un modelo de persistencia orientado a documentos parece muy adecuado. Consta además de un pequeño módulo de validación de datos para verificar que la medida enviada por los sensores no contiene valores disparatados debido a un posible mal funcionamiento de estos. Se ofrecerá también un pequeño front-end que servirá para presentar la información.
 
 Los dispositivos serán los clientes y por tanto los que establecerán conexión con el servidor y enviarán los datos. No será el servidor quien pregunte a los dispositivos por los datos y estos respondan con la información. La razón es que en futuras iteraciones, es posible que se optimice el funcionamiento de los dispositivos para que funcionen con baterías o paneles solares. Para conseguir esto, los dispositivos entrarán en un modo de sueño profundo que les impedirá conectarse a la red y por tanto no podrían escuchar ninguna petición. Serán estos dispositivos los que despertarán del sueño para enviar los datos al servidor y volver a su modo de *deep sleep*.
 
@@ -210,4 +210,14 @@ Este trabajo tiene también como objetivo el aprendizaje, la prueba y la explora
 
 ### 2. Despliegue y uso del proyecto
 
-### 3. Demostracion
+El proyecto se ofrece virtualizado con *docker* y *docker compose*. Además de para facilitar su despliegue, evitar instalaciones y otras ventajas, se opta por esta técnica debido a la gran volatilidad e inestabilidad del mundo de Javascript, que podría hacer que en un futuro a relativo corto plazo el proyecto dejase de arrancar por problemas de dependencias, versiones y compatibilidades. De esta forma, se garantiza un ecosistema virtualizado que siempre funcionará independientemente del tiempo o la plataforma.
+
+Para desplegar el proyecto únicamente debe ejecutarse el dichero de *docker compose*, mapeando el puerto del contenedor del servidor al de la máquina anfitrión. Los componentes del proyecto se han desglosado (en grandes bloques, no se trata de microservicios) para facilitar la modularidad y el desarrollo de otras aplicaciones que se apoyen en el trabajo ya realizado. Se proveen por tanto tres contenedores:
+
+* Base de datos: contenedor de MongoDB.
+* Servidor: contenedor que contiene el servidor NodeJS y es el eje central del proyecto mediante la API REST que usan dispositivos y otras aplicaciones.
+* Front-end: contenedor que contiene una sencilla aplicacion web.
+
+Con este diseño es posible reaprovechar las partes del proyecto que se desee o crear otras nuevas. Por ejemplo, puede configurarse el contenedor del servidor para que utilice otra base de datos o puede no desplegarse el front-end y construirse otro. Con este diseño modular también sería sencillo llevar el proyecto a la nube, parcial o totalmente para poder acceder a los datos desde cualquier lugar.
+
+### 3. Demostración
