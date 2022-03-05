@@ -14,4 +14,7 @@ export class Measure extends BaseEntity {
 
     @Column()
     terrainHumidity: number;
+
+    @Column()
+    timestamp: Date;
 }
