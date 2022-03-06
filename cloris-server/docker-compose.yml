@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  cloris-server:
+    container_name: cloris-backend
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    networks:
+      - nesjs-network
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+  mongodb:
+    image : mongo:latest
+    container_name: mongodb
+    command: [--auth]
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=clorisowner
+      - MONGO_INITDB_ROOT_PASSWORD=clorisowner
+      - MONGO_INITDB_DATABASE=cloris
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - nesjs-network
+    restart: always
+networks:
+  nesjs-network:
+    driver: bridge
