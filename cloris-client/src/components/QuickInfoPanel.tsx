@@ -1,6 +1,9 @@
 import { CardGroup, Container, Row } from "react-bootstrap"
 import { CustomCard } from "./CustomCard"
-
+import { faTemperatureEmpty } from '@fortawesome/free-solid-svg-icons'
+import { faWater } from '@fortawesome/free-solid-svg-icons'
+import { faCloud } from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core"
 
 export const QuickInfoPanel = () => {
 
@@ -12,22 +15,22 @@ export const QuickInfoPanel = () => {
         timestamp: "2022-03-06T02:22:19.351Z"
     }
 
-    const cardAttributes: {title: string, iconName: string, value: number, unit: string}[] = [
+    const cardAttributes: {title: string, icon: IconDefinition, value: number, unit: string}[] = [
         {
             title: 'Temperatura',
-            iconName: 'fa-temp',
+            icon: faTemperatureEmpty,
             unit: 'ºC',
             value: response.temperature
         },
         {
             title: 'Humedad del aire',
-            iconName: 'fa-hum',
+            icon: faCloud,
             unit: '%',
             value: response.airHumidity
         },
         {
             title: 'Humedad del terreno',
-            iconName: 'fa-terr',
+            icon: faWater,
             unit: '%',
             value: response.terrainHumidity
         }
@@ -40,7 +43,7 @@ export const QuickInfoPanel = () => {
         <CardGroup>
             {
                 cardAttributes.map(cardAttribute => (
-                    <CustomCard {...cardAttribute}  />
+                    <CustomCard {...cardAttribute} />
                 ))
             }
         </CardGroup>
