@@ -28,8 +28,6 @@ Los dispositivos se comunican con un servidor que almacenará la información en
 
 Los dispositivos serán los clientes y por tanto los que establecerán conexión con el servidor y enviarán los datos. No será el servidor quien pregunte a los dispositivos por los datos y estos respondan con la información. La razón es que en futuras iteraciones, es posible que se optimice el funcionamiento de los dispositivos para que funcionen con baterías o paneles solares. Para conseguir esto, los dispositivos entrarán en un modo de sueño profundo que les impedirá conectarse a la red y por tanto no podrían escuchar ninguna petición. Serán estos dispositivos los que despertarán del sueño para enviar los datos al servidor y volver a su modo de *deep sleep*.
 
-![](https://github.com/alexrcas/cloris/blob/master/data/cloris-arq.drawio.png)
-
 En cuanto al esquema y flujo de datos, los sensores enviarán su respectiva información y el servidor la completará añadiendo un timestamp antes de insertarlas en base de datos. Nótese que las medidas de cada sensor son independientes y se insertan cada una en su propia colección.
 
 ![](https://github.com/alexrcas/cloris/blob/master/data/cloris-data.drawio.png)
