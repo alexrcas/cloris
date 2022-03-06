@@ -218,6 +218,8 @@ Para desplegar el proyecto únicamente debe ejecutarse el dichero de *docker com
 * Servidor: contenedor que contiene el servidor NodeJS y es el eje central del proyecto mediante la API REST que usan dispositivos y otras aplicaciones.
 * Front-end: contenedor que contiene una sencilla aplicacion web.
 
-Con este diseño es posible reaprovechar las partes del proyecto que se desee o crear otras nuevas. Por ejemplo, puede configurarse el contenedor del servidor para que utilice otra base de datos o puede no desplegarse el front-end y construirse otro. Con este diseño modular también sería sencillo llevar el proyecto a la nube, parcial o totalmente para poder acceder a los datos desde cualquier lugar.
+Con este diseño es posible engancharse solo a determinadas partes del proyecto, utilizando todo el trabajo o bien sustituyendo o acoplando otras partes del mismo. Por ejemplo, puede configurarse el contenedor del servidor para que utilice otra base de datos o puede no desplegarse el front-end y construirse otro. También sería sencillo llevar el proyecto a la nube parcial o totalmente para poder acceder a los datos desde cualquier lugar.
+
+![](https://github.com/alexrcas/cloris/blob/master/data/cloris-compose.png)
 
 ### 3. Demostración
