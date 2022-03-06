@@ -9,6 +9,8 @@ export const WateringInfoPanel = () => {
         month: 7
     };
 
+    const labels = ['Hoy', 'Esta semana', 'Este mes']
+
   return (
 
     <Container className="mt-4">
@@ -38,7 +40,7 @@ export const WateringInfoPanel = () => {
                                         Object.values(litersUsedInfo).map((value, i) => 
                                             (
                                                 <Accordion.Item eventKey={i.toString()}>
-                                                    <Accordion.Header>Hoy</Accordion.Header>
+                                                    <Accordion.Header>{labels[i]}</Accordion.Header>
                                                     <Accordion.Body>
                                                         {value} litros
                                                     </Accordion.Body>

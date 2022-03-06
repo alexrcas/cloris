@@ -12,7 +12,7 @@ export const CustomCard = (
     <Card>
     <Card.Body>
         <Card.Title>{ title }</Card.Title>
-        <Card.Text className="d-flex justify-content-center text-info">
+        <Card.Text className="d-flex justify-content-center info-panel-color">
           <FontAwesomeIcon icon={icon} size={'6x'} />
         </Card.Text>
         <h2 className="justify-content-center d-flex">{ value } { unit }</h2>

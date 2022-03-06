@@ -1,3 +1,7 @@
 body {
     background-color: rgb(128, 235, 176);
 } 
+
+.info-panel-color {
+    color: rgb(199, 230, 243);
+}
