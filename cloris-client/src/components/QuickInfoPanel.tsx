@@ -4,8 +4,27 @@ import { faTemperatureEmpty } from '@fortawesome/free-solid-svg-icons'
 import { faWater } from '@fortawesome/free-solid-svg-icons'
 import { faCloud } from '@fortawesome/free-solid-svg-icons'
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core"
+import { useEffect, useState } from "react"
 
 export const QuickInfoPanel = () => {
+
+    interface IenvironmentData {
+        id: number,
+        temperature: number,
+        airHumidity: number,
+        terrainHumidity: number,
+        timestamp: Date
+    }
+
+    const [environmentData, setEnvironmentData] = useState<IenvironmentData>()
+
+    useEffect(() => {
+        fetch('http://localhost:3000/measures')
+            .then(response => response.json())
+            .then(data => console.log(data))
+    }, [])
+    
+    
 
     const response = {
         id: "62241adb0371d9f051048717",
@@ -43,7 +62,7 @@ export const QuickInfoPanel = () => {
         <CardGroup>
             {
                 cardAttributes.map(cardAttribute => (
-                    <CustomCard {...cardAttribute} />
+                    <CustomCard {...cardAttribute} key={cardAttribute.title} />
                 ))
             }
         </CardGroup>

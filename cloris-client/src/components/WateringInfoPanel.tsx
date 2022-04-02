@@ -39,7 +39,7 @@ export const WateringInfoPanel = () => {
                                     {
                                         Object.values(litersUsedInfo).map((value, i) => 
                                             (
-                                                <Accordion.Item eventKey={i.toString()}>
+                                                <Accordion.Item eventKey={i.toString()} key={i}>
                                                     <Accordion.Header>{labels[i]}</Accordion.Header>
                                                     <Accordion.Body>
                                                         {value} litros
