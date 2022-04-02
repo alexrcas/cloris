@@ -6,6 +6,7 @@ import { TimestampMiddleware } from './middlewares/timestamp.middleware';
 import { WateringsController } from './controllers/waterings.controller';
 import { WateringsService } from './services/waterings.service';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { ValidatorMiddleware } from './middlewares/validator.middleware';
 
 @Module({
   imports: [DatabaseModule],
@@ -16,6 +17,8 @@ export class AppModule {
   
   configure(consumer: MiddlewareConsumer) {
     consumer
+      .apply(ValidatorMiddleware)
+      .forRoutes('measures', 'waterings')
       .apply(TimestampMiddleware)
       .forRoutes('measures', 'waterings')
       .apply(LoggerMiddleware)
