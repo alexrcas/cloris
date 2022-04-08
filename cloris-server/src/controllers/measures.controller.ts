@@ -21,6 +21,11 @@ export class MeasuresController {
         return await this.measureService.list();
     }
 
+    @Get('/last')
+    async getLastMeasure(): Promise<Measure> {
+        return await this.measureService.getLast()
+    }
+
     @Get(':id')
     async getMeasure(@Param('id') id: string): Promise<Measure> {
         return await this.measureService.get(id);

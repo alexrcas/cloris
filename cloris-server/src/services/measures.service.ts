@@ -36,6 +36,10 @@ export class MeasuresService {
         return await this.measureRepository.findOne(id);
     }
 
+    async getLast(): Promise<Measure> {
+        return await this.measureRepository.findOne({ order: {timestamp: 'DESC'} });
+    }
+
     async create(measure: Measure): Promise<Measure> {
         return await this.measureRepository.save(measure);
     }
