@@ -60,6 +60,11 @@ class MeasureStrategy extends Strategy {
   }
 
   public isValidData(): boolean {
+
+    if (this.request.method != 'POST') {
+      return true;
+    }
+
     const temperature = this.request.body.temperature;
     const airHumidity = this.request.body.airHumidity;
     const terrainHumidity = this.request.body.terrainHumidity;
@@ -83,6 +88,11 @@ class WateringStrategy extends Strategy {
   }
 
   public isValidData(): boolean {
+    
+    if (this.request.method != 'POST') {
+      return true;
+    }
+
     const litersUsed = this.request.body.litersUsed;
     return Number.isFinite(litersUsed);
   }
