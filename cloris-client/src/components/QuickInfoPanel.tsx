@@ -7,7 +7,7 @@ import useFetch from "../hooks/useFetch"
 
 export const QuickInfoPanel = () => {
 
-    const url = 'http://localhost:3000/measures';
+    const url = 'http://localhost:3000/measures/last';
 
     interface IenvironmentData {
         id: number,
@@ -17,26 +17,24 @@ export const QuickInfoPanel = () => {
         timestamp: Date
     }
 
-    const { data, error } = useFetch<IenvironmentData[]>(url)
+    const { data, error } = useFetch<IenvironmentData>(url)
 
     if (!data) {
         return <p>Cargando...</p>
     }
-
-    const measure: IenvironmentData = data[0];
 
     return (
 
     <Container className="mt-4">
 
         <CardGroup>
-            <CustomCard title='Temperatura' icon={faTemperatureEmpty} value={measure.temperature} unit='ºC'/>
-            <CustomCard title='Humedad del aire' icon={faCloud} value={measure.airHumidity} unit='%'/>
-            <CustomCard title='Humedad del terreno' icon={faWater} value={measure.terrainHumidity} unit='%'/>
+            <CustomCard title='Temperatura' icon={faTemperatureEmpty} value={data.temperature} unit='ºC'/>
+            <CustomCard title='Humedad del aire' icon={faCloud} value={data.airHumidity} unit='%'/>
+            <CustomCard title='Humedad del terreno' icon={faWater} value={data.terrainHumidity} unit='%'/>
         </CardGroup>
 
         <Row className="mt-2 d-flex">
-            <span className="d-flex justify-content-end fst-italic fw-light">Última sincronización: {measure.timestamp}</span>
+            <span className="d-flex justify-content-end fst-italic fw-light">Última sincronización: {data.timestamp}</span>
         </Row>
 
     </Container>
