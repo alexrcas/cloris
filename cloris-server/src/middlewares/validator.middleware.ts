@@ -15,6 +15,7 @@ export class ValidatorMiddleware implements NestMiddleware {
 
     if(!strategy.isValidData()) {
       res.end('Validator Middleware refused data');
+      this.logger.error('Error en los datos enviados desde los sensores: ', req.body)
       return;
     }
 
@@ -59,6 +60,17 @@ class MeasureStrategy extends Strategy {
   }
 
   public isValidData(): boolean {
+    const temperature = this.request.body.temperature;
+    const airHumidity = this.request.body.airHumidity;
+    const terrainHumidity = this.request.body.terrainHumidity;
+
+    if (!Number.isFinite(temperature))
+      return false;
+    if (!Number.isFinite(airHumidity))
+      return false;
+    if (!Number.isFinite(terrainHumidity))
+      return false;
+
     return true;
   }
 
@@ -71,7 +83,8 @@ class WateringStrategy extends Strategy {
   }
 
   public isValidData(): boolean {
-    return true;
+    const litersUsed = this.request.body.litersUsed;
+    return Number.isFinite(litersUsed);
   }
 
 }
