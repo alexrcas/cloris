@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Query, Req } from '@nestjs/common';
+import { WateringInfoDTO } from 'src/dto/wateringInfo.dto';
 import { Watering } from 'src/entities/watering.entity';
 import { toMongoDbDate } from 'src/helpers/dateparser.helper';
 import { CustomRequest } from 'src/middlewares/timestamp.middleware';
@@ -18,6 +19,17 @@ export class WateringsController {
             return await this.wateringService.listByFilter(fromDate, toDate);
         }
         return await this.wateringService.list();
+    }
+
+
+    @Get('/last')
+    async getLastMeasure(): Promise<Watering> {
+        return await this.wateringService.getLast();
+    }
+
+    @Get('/summary')
+    async getSummary(): Promise<WateringInfoDTO> {
+        return await this.wateringService.getSummary();
     }
 
     @Get(':id')
