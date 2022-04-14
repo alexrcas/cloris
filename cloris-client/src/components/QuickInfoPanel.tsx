@@ -38,8 +38,10 @@ export const QuickInfoPanel = () => {
             <CustomCard title='Humedad del terreno' icon={faWater} value={data.terrainHumidity} unit='%'/>
         </CardGroup>
 
-        <Row className="mt-2 d-flex">
-            <span className="d-flex justify-content-end fst-italic fw-light">Última sincronización: <Moment format='DD/MM/YYYY HH:mm'>{data.timestamp}</Moment></span>
+        <Row className="mt-2">
+            <span className="d-inline-flex justify-content-end fst-italic fw-light">Última sincronización:
+                <span className="mx-1"><Moment fromNow>{data.timestamp}</Moment></span>
+            </span>
         </Row>
 
     </Container>
