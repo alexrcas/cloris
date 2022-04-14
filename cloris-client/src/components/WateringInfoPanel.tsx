@@ -1,6 +1,11 @@
 import { Accordion, Alert, Button, Card, CardGroup, Container } from "react-bootstrap"
+import useFetch from "../hooks/useFetch";
 
 export const WateringInfoPanel = () => {
+
+    const url = 'http://localhost:3000/waterings/summary';
+
+    const url2 = 'http://localhost:3000/waterings/last';
 
     interface IWateringInfo {
         last: number,
@@ -11,17 +16,15 @@ export const WateringInfoPanel = () => {
         }
     }
 
+    const { data, error } = useFetch<IWateringInfo>(url)
 
-    const wateringInfo: IWateringInfo = {
-        last: 0.2,
-        history: {
-            today: 0.5,
-            week: 3,
-            month: 7
-        }
-    };
+    const { data: lastData, error: lastError } = useFetch<any>(url2)
 
     const labels = ['Hoy', 'Esta semana', 'Este mes']
+
+    if (!data || !lastData) {
+        return <p>Cargando...</p>
+    }
 
   return (
 
@@ -36,9 +39,9 @@ export const WateringInfoPanel = () => {
                     <Card>
                         <Card.Body>
                             <Card.Title>Último riego</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Hoy, a las 17:41</Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">{lastData.timestamp}</Card.Subtitle>
                             <Card.Text>
-                                <h6>{wateringInfo.last} litros</h6>
+                                <h5>{lastData.litersUsed} litros usados</h5>
                             </Card.Text>
                         </Card.Body>
                     </Card>
@@ -49,7 +52,7 @@ export const WateringInfoPanel = () => {
 
                                 <Accordion alwaysOpen defaultActiveKey={['0', '1', '2']}>
                                     {
-                                        Object.values(wateringInfo.history).map((value, i) => 
+                                        Object.values(data.history).map((value, i) => 
                                             (
                                                 <Accordion.Item eventKey={i.toString()} key={i}>
                                                     <Accordion.Header>{labels[i]}</Accordion.Header>
