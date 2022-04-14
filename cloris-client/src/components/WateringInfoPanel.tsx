@@ -1,4 +1,5 @@
 import { Accordion, Alert, Button, Card, CardGroup, Container } from "react-bootstrap"
+import Moment from "react-moment";
 import useFetch from "../hooks/useFetch";
 
 export const WateringInfoPanel = () => {
@@ -38,7 +39,7 @@ export const WateringInfoPanel = () => {
             <Card className="mb-2">
                 <Card.Body>
                     <Card.Title>Último riego</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{lastData.timestamp}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted"><Moment format='DD/MM/YYYY HH:mm:ss'>{lastData.timestamp}</Moment></Card.Subtitle>
                     <Card.Text>
                         <h6>{lastData.litersUsed} litros usados</h6>
                     </Card.Text>

@@ -4,6 +4,11 @@ import { faTemperatureEmpty } from '@fortawesome/free-solid-svg-icons'
 import { faWater } from '@fortawesome/free-solid-svg-icons'
 import { faCloud } from '@fortawesome/free-solid-svg-icons'
 import useFetch from "../hooks/useFetch"
+import Moment from "react-moment"
+import 'moment/locale/es';
+import moment from "moment"
+
+moment.locale('es');
 
 export const QuickInfoPanel = () => {
 
@@ -34,7 +39,7 @@ export const QuickInfoPanel = () => {
         </CardGroup>
 
         <Row className="mt-2 d-flex">
-            <span className="d-flex justify-content-end fst-italic fw-light">Última sincronización: {data.timestamp}</span>
+            <span className="d-flex justify-content-end fst-italic fw-light">Última sincronización: <Moment format='DD/MM/YYYY HH:mm'>{data.timestamp}</Moment></span>
         </Row>
 
     </Container>
