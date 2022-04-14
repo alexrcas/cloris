@@ -2,11 +2,23 @@ import { Accordion, Alert, Button, Card, CardGroup, Container } from "react-boot
 
 export const WateringInfoPanel = () => {
 
+    interface IWateringInfo {
+        last: number,
+        history: {
+            today: number,
+            week: number,
+            month: number
+        }
+    }
 
-    const litersUsedInfo = {
-        today: 0.5,
-        week: 3,
-        month: 7
+
+    const wateringInfo: IWateringInfo = {
+        last: 0.2,
+        history: {
+            today: 0.5,
+            week: 3,
+            month: 7
+        }
     };
 
     const labels = ['Hoy', 'Esta semana', 'Este mes']
@@ -26,7 +38,7 @@ export const WateringInfoPanel = () => {
                             <Card.Title>Último riego</Card.Title>
                             <Card.Subtitle className="mb-2 text-muted">Hoy, a las 17:41</Card.Subtitle>
                             <Card.Text>
-                                <h6>0.5 litros</h6>
+                                <h6>{wateringInfo.last} litros</h6>
                             </Card.Text>
                         </Card.Body>
                     </Card>
@@ -37,7 +49,7 @@ export const WateringInfoPanel = () => {
 
                                 <Accordion alwaysOpen defaultActiveKey={['0', '1', '2']}>
                                     {
-                                        Object.values(litersUsedInfo).map((value, i) => 
+                                        Object.values(wateringInfo.history).map((value, i) => 
                                             (
                                                 <Accordion.Item eventKey={i.toString()} key={i}>
                                                     <Accordion.Header>{labels[i]}</Accordion.Header>
