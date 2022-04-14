@@ -31,24 +31,24 @@ export const WateringInfoPanel = () => {
     <Container className="mt-4">
         
         <Card>
-            <Card.Header>Información del riego</Card.Header>
+            <Card.Header><h5>Información del riego</h5></Card.Header>
             <Card.Body>
 
-                <CardGroup>
+
+            <Card className="mb-2">
+                <Card.Body>
+                    <Card.Title>Último riego</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">{lastData.timestamp}</Card.Subtitle>
+                    <Card.Text>
+                        <h6>{lastData.litersUsed} litros usados</h6>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+
 
                     <Card>
                         <Card.Body>
-                            <Card.Title>Último riego</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">{lastData.timestamp}</Card.Subtitle>
-                            <Card.Text>
-                                <h5>{lastData.litersUsed} litros usados</h5>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Body>
-                            <Card.Title>Consumo de agua</Card.Title>
+                            <Card.Title>Historial de Consumo</Card.Title>
 
                                 <Accordion alwaysOpen defaultActiveKey={['0', '1', '2']}>
                                     {
@@ -68,7 +68,6 @@ export const WateringInfoPanel = () => {
                         </Card.Body>
                     </Card>
 
-                </CardGroup>
 
             </Card.Body>
         </Card>
