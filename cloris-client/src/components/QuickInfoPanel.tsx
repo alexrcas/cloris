@@ -12,7 +12,7 @@ moment.locale('es');
 
 export const QuickInfoPanel = () => {
 
-    const url = 'http://localhost:3000/measures/last';
+    const url = 'http://192.168.0.18:3000/measures/last';
 
     interface IenvironmentData {
         id: number,

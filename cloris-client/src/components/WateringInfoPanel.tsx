@@ -4,11 +4,11 @@ import useFetch from "../hooks/useFetch";
 
 export const WateringInfoPanel = () => {
 
-    const url = 'http://localhost:3000/waterings/summary';
+    const urlSummary = 'http://192.168.0.18:3000/waterings/summary';
 
-    const url2 = 'http://localhost:3000/waterings/last';
+    const urlLastWatering = 'http://192.168.0.18:3000/waterings/last';
 
-    interface IWateringInfo {
+    interface IWateringSummary {
         last: number,
         history: {
             today: number,
@@ -17,13 +17,19 @@ export const WateringInfoPanel = () => {
         }
     }
 
-    const { data, error } = useFetch<IWateringInfo>(url)
+    interface IWatering {
+        id: string
+        litersUsed: number,
+        timestamp: Date,
+    }
 
-    const { data: lastData, error: lastError } = useFetch<any>(url2)
+    const { data: summaryData, error: summaryError } = useFetch<IWateringSummary>(urlSummary);
+
+    const { data: lastData, error: lastError } = useFetch<IWatering>(urlLastWatering);
 
     const labels = ['Hoy', 'Esta semana', 'Este mes']
 
-    if (!data || !lastData) {
+    if (!summaryData || !lastData) {
         return <p>Cargando...</p>
     }
 
@@ -53,7 +59,7 @@ export const WateringInfoPanel = () => {
 
                                 <Accordion alwaysOpen defaultActiveKey={['0', '1', '2']}>
                                     {
-                                        Object.values(data.history).map((value, i) => 
+                                        Object.values(summaryData.history).map((value, i) => 
                                             (
                                                 <Accordion.Item eventKey={i.toString()} key={i}>
                                                     <Accordion.Header>{labels[i]}</Accordion.Header>
