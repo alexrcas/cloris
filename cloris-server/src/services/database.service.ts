@@ -11,6 +11,8 @@ export const databaseProviders = [
                 host: 'localhost',
                 port: 27017,
                 database: 'cloris',
+                useUnifiedTopology: true,
+                authSource: 'admin',
                 username: 'clorisowner',
                 password: 'clorisowner',
                 entities: [__dirname + '/../**/*.entity{.js,.ts}']
